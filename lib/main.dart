@@ -1,3 +1,4 @@
+import 'package:digital_doctor/dashboard_page.dart';
 import 'package:digital_doctor/login_page.dart';
 import 'package:digital_doctor/register_page.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WelcomeScreen(),
+      home: const Dashboard(),
     );
   }
 }
