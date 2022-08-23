@@ -11,7 +11,7 @@ class WelcomeScreen extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Scaffold(
-          backgroundColor: Colors.grey[300],
+          backgroundColor: kMainBackgroundColor,
           body: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
@@ -30,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         //width: 400,
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: kPrimaryColor,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Image.asset(
@@ -76,53 +76,28 @@ class WelcomeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.red[500],
-                            ),
-                            child: MaterialButton(
-                              elevation: 0,
-                              color: Colors.red[500],
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RegistrationForm()));
-                              },
-                              child: const Text(
-                                'Register',
-                                style: TextStyle(
-                                    fontSize: 17, color: Colors.white),
-                              ),
-                            )),
-                        const SizedBox(width: 5),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.red[500],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegistrationForm()));
+                          },
+                          child: Btnbox(
+                            child: "Register",
                           ),
-                          child: MaterialButton(
-                            elevation: 0,
-                            color: Colors.red[500],
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()));
-                            },
-                            child: const Text(
-                              'Sign In',
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.white),
-                            ),
+                        ),
+                        const SizedBox(width: 5),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          },
+                          child: Btnbox(
+                            child: "Sign In",
                           ),
                         ),
                       ],

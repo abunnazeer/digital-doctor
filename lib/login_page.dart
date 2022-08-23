@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:digital_doctor/function_file.dart';
 import 'package:digital_doctor/register_page.dart';
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
     );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: kMainBackgroundColor,
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -153,51 +154,10 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            width: 80,
-                            height: 45,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/google.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 45,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/apple.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 45,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/facebook.png',
-                                ),
-                              ),
-                            ),
-                          )
+                          // Other login section
+                          OtherLogin(imagePath: 'assets/google.png'),
+                          OtherLogin(imagePath: 'assets/apple.png'),
+                          OtherLogin(imagePath: 'assets/facebook.png'),
                         ],
                       ),
 

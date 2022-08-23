@@ -1,3 +1,9 @@
+import 'package:digital_doctor/consultation_page.dart';
+import 'package:digital_doctor/doctors_list.dart';
+import 'package:digital_doctor/doctors_profile.dart';
+import 'package:digital_doctor/function_file.dart';
+import 'package:digital_doctor/hospital_page.dart';
+import 'package:digital_doctor/pharmacy_page.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: prefer_const_constructors
@@ -9,11 +15,60 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final List doctorsLists = [
+    ['Anna', 'assets/annashvets.png'],
+    ['Antoni', 'assets/antonishkraba.png'],
+    ['Ahmad', 'assets/gustavofring.png'],
+    ['Mustapha', 'assets/danieldan.png'],
+    ['Ibrahim', 'assets/alexanderzvir.png'],
+  ];
+
+  final List ourDoctorsList = [
+    [
+      'assets/danieldan.png',
+      'Dr. Fatima  Ahmad',
+      'Microbiologist',
+      Icons.heart_broken
+    ],
+    [
+      'assets/antonishkraba.png',
+      'Dr. Habiba  Ahmad',
+      'Physicist',
+      Icons.heart_broken
+    ],
+    [
+      'assets/gustavofring.png',
+      'Dr. Ahmad Abdullahi',
+      'Pharmacologist',
+      Icons.heart_broken
+    ],
+  ];
+
+  final List doctorsGridview = [
+    ['assets/doctor.png', 'Doctors'],
+    ['assets/hospital.png', 'Hospital'],
+    ['assets/medicine.png', 'Pharmacy'],
+    ['assets/emergency.png', 'Consultation'],
+    ['assets/microscope.png', 'Lab Services'],
+    ['assets/categories.png', 'Others'],
+  ];
+
+  List dasboardGridPages = [
+    const DoctorsListIndex(),
+    const HospitalPage(),
+    const PharmacyPage(),
+    const ConsultationPage(),
+    const ConsultationPage(),
+    const ConsultationPage(),
+  ];
+  // Box has been tap
+  //void boxTap(String boxTaped) {}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: kMainBackgroundColor,
         bottomNavigationBar: BottomNavigationBar(
           iconSize: 30,
           selectedIconTheme: IconThemeData(
@@ -47,7 +102,7 @@ class _DashboardState extends State<Dashboard> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: const Text(
@@ -99,167 +154,37 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/dr.png',
-                          ),
-                        ),
-                        Text(
-                          "Doctors",
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/hospital.png',
-                          ),
-                        ),
-                        Text(
-                          "Hospital",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/medicine.png',
-                          ),
-                        ),
-                        Text(
-                          "Pharmacy",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/emergency.png',
-                          ),
-                        ),
-                        Text(
-                          "Consultation",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/microscope.png',
-                          ),
-                        ),
-                        Text(
-                          "Lab Services",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Image(
-                          width: 40,
-                          height: 40,
-                          image: AssetImage(
-                            'assets/categories.png',
-                          ),
-                        ),
-                        Text(
-                          "Others",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 248,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: doctorsGridview.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: DrDashboardItem(
+                              drIconPath: doctorsGridview[index][0],
+                              drIconName: doctorsGridview[index][1],
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          dasboardGridPages[index]),
+                                );
+                              }),
+                        );
+                      }),
+                ),
               ),
-              SizedBox(height: 8),
+              // SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -277,137 +202,31 @@ class _DashboardState extends State<Dashboard> {
               ),
               SizedBox(height: 8),
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  child: ListView.builder(
+                    itemCount: doctorsLists.length,
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      Container(
-                        //height: 120,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[100],
-                        ),
-                        child: Column(
-                          children: const <Widget>[
-                            Image(
-                              width: 80,
-                              height: 80,
-                              image: AssetImage(
-                                'assets/annashvets.png',
-                              ),
-                            ),
-                            Text(
-                              "Anna",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        //height: 150,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[100],
-                        ),
-                        child: Column(
-                          children: const <Widget>[
-                            Image(
-                              width: 80,
-                              height: 80,
-                              image: AssetImage(
-                                'assets/antonishkraba.png',
-                              ),
-                            ),
-                            Text(
-                              "Antoni",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        //height: 150,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[100],
-                        ),
-                        child: Column(
-                          children: const <Widget>[
-                            Image(
-                              width: 80,
-                              height: 80,
-                              image: AssetImage(
-                                'assets/gustavofring.png',
-                              ),
-                            ),
-                            Text(
-                              "Ahmad",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        //height: 150,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[100],
-                        ),
-                        child: Column(
-                          children: const <Widget>[
-                            Image(
-                              width: 80,
-                              height: 80,
-                              image: AssetImage(
-                                'assets/danieldan.png',
-                              ),
-                            ),
-                            Text(
-                              "Mustapha",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[100],
-                        ),
-                        child: Column(
-                          children: const <Widget>[
-                            Image(
-                              width: 80,
-                              height: 80,
-                              image: AssetImage(
-                                'assets/alexanderzvir.png',
-                              ),
-                            ),
-                            Text(
-                              "Ibrahim",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                    itemBuilder: (context, index) {
+                      return SPdListview(
+                        drImagePath: doctorsLists[index][1],
+                        drName: doctorsLists[index][0],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DoctorProfilePage()),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
               SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -426,141 +245,17 @@ class _DashboardState extends State<Dashboard> {
               SizedBox(height: 5),
               Expanded(
                 flex: 2,
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.red.shade900, Colors.red.shade50],
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white,
-                                      ),
-                                      child: Image(
-                                        width: 70,
-                                        height: 70,
-                                        image: AssetImage(
-                                          'assets/danieldan.png',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    children: const [
-                                      Text(
-                                        "Dr. Ahmad Abdullahi",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "Microbiologist",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Colors.white),
-                                child: Icon(
-                                  Icons.heart_broken,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.red.shade900, Colors.red.shade50],
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white,
-                                      ),
-                                      child: Image(
-                                        width: 70,
-                                        height: 70,
-                                        image: AssetImage(
-                                          'assets/danieldan.png',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    children: const [
-                                      Text(
-                                        "Dr. Ahmad Abdullahi",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "Microbiologist",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Colors.white),
-                                child: Icon(
-                                  Icons.heart_broken,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                child: ListView.builder(
+                  itemCount: ourDoctorsList.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return OurDoctorListview(
+                      drPhotoPath: ourDoctorsList[index][0],
+                      drTitle: ourDoctorsList[index][1],
+                      drSubtitle: ourDoctorsList[index][2],
+                      drIconPaths: ourDoctorsList[index][3],
+                    );
+                  },
                 ),
               ),
             ],

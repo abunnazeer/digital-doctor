@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:digital_doctor/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:digital_doctor/function_file.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RegistrationForm extends StatefulWidget {
@@ -198,51 +199,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            width: 70,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/google.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/apple.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 70,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/facebook.png',
-                                ),
-                              ),
-                            ),
-                          )
+                          OtherLogin(imagePath: 'assets/google.png'),
+                          OtherLogin(imagePath: 'assets/apple.png'),
+                          OtherLogin(imagePath: 'assets/facebook.png'),
                         ],
                       ),
 
