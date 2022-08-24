@@ -4,6 +4,9 @@ import 'package:digital_doctor/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_doctor/welcome_screen.dart';
 
+import 'doctors_profile.dart';
+import 'my_map.dart';
+
 void main() {
   runApp(const MyApp());
 }
