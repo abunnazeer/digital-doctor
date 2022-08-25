@@ -1,45 +1,41 @@
 import 'dart:ffi';
 
-import 'package:digital_doctor/login_page.dart';
+import 'package:digital_doctor/functions/function_file.dart';
+import 'package:digital_doctor/pages/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_doctor/function_file.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 // ignore_for_file: prefer_const_constructors
 
-class RegistrationForm extends StatefulWidget {
-  const RegistrationForm({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationForm> createState() => _RegistrationFormState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrationFormState extends State<RegistrationForm> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey();
-  final TextEditingController fullNameController = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
-  final TextEditingController confirmPasswordController =
-      new TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     ///Email field
-    final fullField = TextFormField(
-      autofocus: false,
-      controller: fullNameController,
-      keyboardType: TextInputType.text,
-      onSaved: (value) {
-        fullNameController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.account_circle),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        border: InputBorder.none,
-        hintText: 'Full Name',
-      ),
-    );
-
-    //Email filed
     final emailField = TextFormField(
       autofocus: false,
       controller: emailController,
@@ -64,7 +60,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       onSaved: (value) {
         emailController.text = value!;
       },
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.vpn_key),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -72,25 +68,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
         hintText: 'Password',
       ),
     );
-
-    final confirmPasswordField = TextFormField(
-      autofocus: false,
-      controller: confirmPasswordController,
-      obscureText: true,
-      onSaved: (value) {
-        confirmPasswordController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.vpn_key),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        border: InputBorder.none,
-        hintText: 'Confirm Password',
-      ),
-    );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: kMainBackgroundColor,
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -103,39 +83,30 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 child: Form(
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: 70),
                       Text(
                         textAlign: TextAlign.center,
-                        'Registration',
+                        'Hello Again!',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        textAlign: TextAlign.center,
-                        'Please register down below',
-                        style: TextStyle(
-                          fontSize: 15,
-                          //fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      // FORM SECTION
-                      SizedBox(height: 25),
+                      SizedBox(height: 2),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.white),
-                            color: Colors.grey[100],
+                        padding: EdgeInsets.symmetric(horizontal: 100.0),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          'Welcome back you\'ve been missed!',
+                          style: TextStyle(
+                            fontSize: 17,
+                            //fontWeight: FontWeight.bold,
                           ),
-                          child: fullField,
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      //EMAIL AND PASSWORD SECTION
+                      SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
@@ -160,45 +131,50 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         ),
                       ),
 
+                      //RECOVERY TEXT SECTION
                       SizedBox(height: 20),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.only(right: 20.0),
                         child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.white),
-                            color: Colors.grey[100],
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            textAlign: TextAlign.right,
+                            'Recovery Password',
                           ),
-                          child: confirmPasswordField,
                         ),
                       ),
 
                       //LOGIN BTN SECTION
-                      SizedBox(height: 20),
+                      SizedBox(height: 25),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 45,
-                          //width: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.red[500],
-                          ),
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(fontSize: 17, color: Colors.white),
+                        child: GestureDetector(
+                          onTap: signIn,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 45,
+                            //width: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.red[500],
+                            ),
+                            child: const Text(
+                              'Sign',
+                              style:
+                                  TextStyle(fontSize: 17, color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
 
                       //ALTERNATIVE LOGIN SECTION
-                      SizedBox(height: 15),
+                      SizedBox(height: 30),
                       Text('Or continue with'),
-                      SizedBox(height: 25),
+                      SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          // Other login section
                           OtherLogin(imagePath: 'assets/google.png'),
                           OtherLogin(imagePath: 'assets/apple.png'),
                           OtherLogin(imagePath: 'assets/facebook.png'),
@@ -206,39 +182,28 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       ),
 
                       //NOT A MEMBER SECTION
-                      SizedBox(height: 15),
-                      Text("By registering up you accept the"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text("Terms of services ",
-                              style: TextStyle(color: Colors.blue)),
-                          Text("and "),
-                          Text("Privacy policy",
-                              style: TextStyle(color: Colors.blue)),
-                        ],
-                      ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Already have an account?"),
+                          Text("Not a member?"),
                           SizedBox(width: 4),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginPage()));
+                                      builder: (context) =>
+                                          RegistrationForm()));
                             },
                             child: Text(
-                              "Login",
+                              "Register now",
                               style: TextStyle(color: Colors.blue),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 50),
                     ],
                   ),
                 ),

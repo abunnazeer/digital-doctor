@@ -1,9 +1,10 @@
-import 'package:digital_doctor/consultation_page.dart';
-import 'package:digital_doctor/doctors_list.dart';
-import 'package:digital_doctor/doctors_profile.dart';
-import 'package:digital_doctor/function_file.dart';
-import 'package:digital_doctor/hospital_page.dart';
-import 'package:digital_doctor/pharmacy_page.dart';
+import 'package:digital_doctor/pages/consultation_page.dart';
+import 'package:digital_doctor/pages/doctors_list.dart';
+import 'package:digital_doctor/pages/doctors_profile.dart';
+import 'package:digital_doctor/functions/function_file.dart';
+import 'package:digital_doctor/pages/hospital_page.dart';
+import 'package:digital_doctor/pages/pharmacy_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: prefer_const_constructors
@@ -15,6 +16,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final user = FirebaseAuth.instance.currentUser!;
   final List doctorsLists = [
     ['Anna', 'assets/annashvets.png'],
     ['Antoni', 'assets/antonishkraba.png'],
@@ -117,16 +119,21 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Lemonoru',
+                      '${user.email!}',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     // Icon(Icons.),
-                    Container(
-                      width: 25,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/notification.png',
+                    GestureDetector(
+                      onTap: () {
+                        FirebaseAuth.instance.signOut();
+                      },
+                      child: Container(
+                        width: 25,
+                        child: Image(
+                          image: AssetImage(
+                            'assets/notification.png',
+                          ),
                         ),
                       ),
                     ),

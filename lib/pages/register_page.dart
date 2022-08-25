@@ -1,25 +1,45 @@
 import 'dart:ffi';
 
-import 'package:digital_doctor/function_file.dart';
-import 'package:digital_doctor/register_page.dart';
+import 'package:digital_doctor/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:digital_doctor/functions/function_file.dart';
 // ignore_for_file: prefer_const_constructors
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegistrationForm extends StatefulWidget {
+  const RegistrationForm({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationForm> createState() => _RegistrationFormState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationFormState extends State<RegistrationForm> {
   final _formKey = GlobalKey();
+  final TextEditingController fullNameController = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController confirmPasswordController =
+      new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     ///Email field
+    final fullField = TextFormField(
+      autofocus: false,
+      controller: fullNameController,
+      keyboardType: TextInputType.text,
+      onSaved: (value) {
+        fullNameController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.account_circle),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        border: InputBorder.none,
+        hintText: 'Full Name',
+      ),
+    );
+
+    //Email filed
     final emailField = TextFormField(
       autofocus: false,
       controller: emailController,
@@ -44,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       onSaved: (value) {
         emailController.text = value!;
       },
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.vpn_key),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -52,9 +72,25 @@ class _LoginPageState extends State<LoginPage> {
         hintText: 'Password',
       ),
     );
+
+    final confirmPasswordField = TextFormField(
+      autofocus: false,
+      controller: confirmPasswordController,
+      obscureText: true,
+      onSaved: (value) {
+        confirmPasswordController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.vpn_key),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        border: InputBorder.none,
+        hintText: 'Confirm Password',
+      ),
+    );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kMainBackgroundColor,
+        backgroundColor: Colors.grey[300],
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -67,30 +103,39 @@ class _LoginPageState extends State<LoginPage> {
                 child: Form(
                   child: Column(
                     children: [
-                      SizedBox(height: 70),
+                      SizedBox(height: 20),
                       Text(
                         textAlign: TextAlign.center,
-                        'Hello Again!',
+                        'Registration',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      SizedBox(height: 4),
+                      Text(
+                        textAlign: TextAlign.center,
+                        'Please register down below',
+                        style: TextStyle(
+                          fontSize: 15,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      // FORM SECTION
+                      SizedBox(height: 25),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 100.0),
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          'Welcome back you\'ve been missed!',
-                          style: TextStyle(
-                            fontSize: 17,
-                            //fontWeight: FontWeight.bold,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white),
+                            color: Colors.grey[100],
                           ),
+                          child: fullField,
                         ),
                       ),
 
-                      //EMAIL AND PASSWORD SECTION
-                      SizedBox(height: 40),
+                      SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
@@ -115,21 +160,21 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      //RECOVERY TEXT SECTION
                       SizedBox(height: 20),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            textAlign: TextAlign.right,
-                            'Recovery Password',
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white),
+                            color: Colors.grey[100],
                           ),
+                          child: confirmPasswordField,
                         ),
                       ),
 
                       //LOGIN BTN SECTION
-                      SizedBox(height: 25),
+                      SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: Container(
@@ -141,20 +186,19 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.red[500],
                           ),
                           child: const Text(
-                            'Sign',
+                            'Register',
                             style: TextStyle(fontSize: 17, color: Colors.white),
                           ),
                         ),
                       ),
 
                       //ALTERNATIVE LOGIN SECTION
-                      SizedBox(height: 30),
+                      SizedBox(height: 15),
                       Text('Or continue with'),
-                      SizedBox(height: 30),
+                      SizedBox(height: 25),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          // Other login section
                           OtherLogin(imagePath: 'assets/google.png'),
                           OtherLogin(imagePath: 'assets/apple.png'),
                           OtherLogin(imagePath: 'assets/facebook.png'),
@@ -162,28 +206,39 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       //NOT A MEMBER SECTION
-                      SizedBox(height: 50),
+                      SizedBox(height: 15),
+                      Text("By registering up you accept the"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text("Terms of services ",
+                              style: TextStyle(color: Colors.blue)),
+                          Text("and "),
+                          Text("Privacy policy",
+                              style: TextStyle(color: Colors.blue)),
+                        ],
+                      ),
+                      SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Not a member?"),
+                          Text("Already have an account?"),
                           SizedBox(width: 4),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          RegistrationForm()));
+                                      builder: (context) => LoginPage()));
                             },
                             child: Text(
-                              "Register now",
+                              "Login",
                               style: TextStyle(color: Colors.blue),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

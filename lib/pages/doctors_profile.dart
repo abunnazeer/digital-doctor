@@ -1,5 +1,5 @@
-import 'package:digital_doctor/function_file.dart';
-import 'package:digital_doctor/my_map.dart';
+import 'package:digital_doctor/functions/function_file.dart';
+import 'package:digital_doctor/pages/my_map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
