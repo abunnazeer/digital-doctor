@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:digital_doctor/welcome_screen.dart';
 
 import 'doctors_profile.dart';
+import 'map_testing.dart';
 import 'my_map.dart';
 
 void main() {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Dashboard(),
+      home: Dashboard(),
     );
   }
 }
