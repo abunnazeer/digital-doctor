@@ -1,7 +1,8 @@
-import 'package:digital_doctor/functions/function_file.dart';
-import 'package:digital_doctor/pages/login_page.dart';
-import 'package:digital_doctor/pages/register_page.dart';
+import 'package:digital_doctor/user/login_page.dart';
+import 'package:digital_doctor/user/register_page.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/function_file.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

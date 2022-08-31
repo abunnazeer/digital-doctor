@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   dio:
     dependency: "direct main"
     description:
@@ -160,6 +167,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  flutter_switch:
+    dependency: "direct main"
+    description:
+      name: flutter_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -310,6 +324,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  page_transition:
+    dependency: "direct main"
+    description:
+      name: page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
   path:
     dependency: transitive
     description:

@@ -1,7 +1,7 @@
-import 'package:digital_doctor/functions/function_file.dart';
-import 'package:digital_doctor/pages/my_map.dart';
+import 'package:digital_doctor/widgets/my_map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../widgets/function_file.dart';
 
 class DoctorProfilePage extends StatelessWidget {
   const DoctorProfilePage({Key? key}) : super(key: key);

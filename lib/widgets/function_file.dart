@@ -1,7 +1,6 @@
-import 'package:digital_doctor/pages/doctors_list.dart';
-import 'package:digital_doctor/pages/register_page.dart';
+import 'package:digital_doctor/doctors/doctors_list.dart';
+import 'package:digital_doctor/user/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_doctor/functions/function_file.dart';
 
 // ignore_for_file: prefer_const_constructors
 const Color kMainBackgroundColor = Color(0xFFE0E0E0);

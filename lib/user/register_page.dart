@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
-import 'package:digital_doctor/pages/login_page.dart';
+import 'package:digital_doctor/user/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_doctor/functions/function_file.dart';
+import '../widgets/function_file.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RegistrationForm extends StatefulWidget {
@@ -14,6 +12,7 @@ class RegistrationForm extends StatefulWidget {
 
 class _RegistrationFormState extends State<RegistrationForm> {
   final _formKey = GlobalKey();
+
   final TextEditingController fullNameController = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
@@ -177,17 +176,21 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 45,
-                          //width: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.red[500],
-                          ),
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(fontSize: 17, color: Colors.white),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 45,
+                            //width: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.red[500],
+                            ),
+                            child: const Text(
+                              'Register',
+                              style:
+                                  TextStyle(fontSize: 17, color: Colors.white),
+                            ),
                           ),
                         ),
                       ),

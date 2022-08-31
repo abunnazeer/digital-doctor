@@ -1,8 +1,9 @@
+import 'package:digital_doctor/config/auth_services.dart';
+import 'package:digital_doctor/user/login_page.dart';
+import 'package:digital_doctor/user/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_doctor/pages/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MainPages(),
+      home: MainPage(),
     );
   }
 }

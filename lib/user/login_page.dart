@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
-import 'package:digital_doctor/functions/function_file.dart';
-import 'package:digital_doctor/pages/register_page.dart';
+import 'package:digital_doctor/config/auth_services.dart';
+import 'package:digital_doctor/user/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../widgets/function_file.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -17,20 +16,25 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey();
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController _emailController = new TextEditingController();
+  final TextEditingController _passwordController = new TextEditingController();
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } catch (error) {
+      print(error.toString());
+    }
   }
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,10 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     ///Email field
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailController,
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       onSaved: (value) {
-        emailController.text = value!;
+        _emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -55,10 +59,10 @@ class _LoginPageState extends State<LoginPage> {
     //Password field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordController,
+      controller: _passwordController,
       obscureText: true,
       onSaved: (value) {
-        emailController.text = value!;
+        _passwordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(

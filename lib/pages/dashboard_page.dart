@@ -1,11 +1,15 @@
-import 'package:digital_doctor/pages/consultation_page.dart';
-import 'package:digital_doctor/pages/doctors_list.dart';
-import 'package:digital_doctor/pages/doctors_profile.dart';
-import 'package:digital_doctor/functions/function_file.dart';
-import 'package:digital_doctor/pages/hospital_page.dart';
-import 'package:digital_doctor/pages/pharmacy_page.dart';
+import 'package:digital_doctor/doctors/consultation_page.dart';
+import 'package:digital_doctor/doctors/doctors_list.dart';
+import 'package:digital_doctor/doctors/doctors_profile.dart';
+import 'package:digital_doctor/doctors/hospital_page.dart';
+import 'package:digital_doctor/doctors/labservices_page.dart';
+import 'package:digital_doctor/doctors/others_page.dart';
+import 'package:digital_doctor/doctors/pharmacy_page.dart';
+import 'package:digital_doctor/widgets/bottom_navigation_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/function_file.dart';
 
 // ignore_for_file: prefer_const_constructors
 class Dashboard extends StatefulWidget {
@@ -16,7 +20,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final user = FirebaseAuth.instance.currentUser!;
   final List doctorsLists = [
     ['Anna', 'assets/annashvets.png'],
     ['Antoni', 'assets/antonishkraba.png'],
@@ -55,51 +58,21 @@ class _DashboardState extends State<Dashboard> {
     ['assets/categories.png', 'Others'],
   ];
 
-  List dasboardGridPages = [
+  List dashboardGridPages = [
     const DoctorsListIndex(),
     const HospitalPage(),
     const PharmacyPage(),
     const ConsultationPage(),
-    const ConsultationPage(),
-    const ConsultationPage(),
+    const LabServicesPage(),
+    const OthersPage(),
   ];
-  // Box has been tap
-  //void boxTap(String boxTaped) {}
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kMainBackgroundColor,
-        bottomNavigationBar: BottomNavigationBar(
-          iconSize: 30,
-          selectedIconTheme: IconThemeData(
-            color: const Color(0xFFD32F2F),
-          ),
-          unselectedIconTheme: IconThemeData(
-            color: const Color(0xFFEF9A9A),
-          ),
-          items: const [
-            BottomNavigationBarItem(
-              //  backgroundColor: Colors.cyan,
-              icon: Icon(Icons.home),
-              label: "home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.event),
-              //   title:Text(Home)
-              label: "home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.check_box_outlined),
-              label: "home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "home",
-            ),
-          ],
-        ),
+        bottomNavigationBar: BottomNavigationPage(indexnumber: 0),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -119,21 +92,16 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      '${user.email!}',
+                      'Ahmad',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     // Icon(Icons.),
-                    GestureDetector(
-                      onTap: () {
-                        FirebaseAuth.instance.signOut();
-                      },
-                      child: Container(
-                        width: 25,
-                        child: Image(
-                          image: AssetImage(
-                            'assets/notification.png',
-                          ),
+                    Container(
+                      width: 25,
+                      child: Image(
+                        image: AssetImage(
+                          'assets/notification.png',
                         ),
                       ),
                     ),
@@ -182,7 +150,7 @@ class _DashboardState extends State<Dashboard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          dasboardGridPages[index]),
+                                          dashboardGridPages[index]),
                                 );
                               }),
                         );
