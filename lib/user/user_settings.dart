@@ -1,3 +1,4 @@
+import 'package:digital_doctor/config/auth_services.dart';
 import 'package:digital_doctor/patients/patient_profile.dart';
 import 'package:digital_doctor/user/login_page.dart';
 import 'package:digital_doctor/widgets/bottom_navigation_page.dart';
@@ -15,8 +16,8 @@ class UserSettings extends StatefulWidget {
 
 class _UserSettingsState extends State<UserSettings> {
   bool status = false;
-
-  final user = FirebaseAuth.instance.currentUser!;
+  final DatabaseService _auth = DatabaseService.int();
+  // final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class _UserSettingsState extends State<UserSettings> {
                               fontSize: 17, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
-                        Text('${user.email!}'),
+                        Text('useremail'),
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () async {
@@ -237,7 +238,7 @@ class _UserSettingsState extends State<UserSettings> {
                     //LOGOUT BTN
                     GestureDetector(
                       onTap: () async {
-                        await FirebaseAuth.instance.signOut().then((result) {
+                        await _auth.signOut().then((result) {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

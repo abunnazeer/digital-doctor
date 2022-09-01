@@ -16,26 +16,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey();
+  final DatabaseService auth = DatabaseService.int();
   final TextEditingController _emailController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
-
-  Future signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-    } catch (error) {
-      print(error.toString());
-    }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: GestureDetector(
-                          onTap: signIn,
+                          onTap: () {
+                            signIn();
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             height: 45,
@@ -217,5 +202,17 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void signIn() async {
+    dynamic authresult = await auth.logIn(
+        _emailController.text.trim(), _passwordController.text.trim());
+    if (authresult == null) {
+      print("Invalid login");
+    } else {
+      _emailController.clear();
+      _passwordController.clear();
+      Navigator.pushNamed(context, '/dashboard');
+    }
   }
 }

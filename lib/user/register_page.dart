@@ -1,3 +1,4 @@
+import 'package:digital_doctor/config/auth_services.dart';
 import 'package:digital_doctor/user/login_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/function_file.dart';
@@ -12,11 +13,11 @@ class RegistrationForm extends StatefulWidget {
 
 class _RegistrationFormState extends State<RegistrationForm> {
   final _formKey = GlobalKey();
-
-  final TextEditingController fullNameController = new TextEditingController();
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
-  final TextEditingController confirmPasswordController =
+  final DatabaseService auth = DatabaseService.int();
+  final TextEditingController _fullNameController = new TextEditingController();
+  final TextEditingController _emailController = new TextEditingController();
+  final TextEditingController _passwordController = new TextEditingController();
+  final TextEditingController _confirmPasswordController =
       new TextEditingController();
 
   @override
@@ -24,10 +25,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
     ///Email field
     final fullField = TextFormField(
       autofocus: false,
-      controller: fullNameController,
+      controller: _fullNameController,
       keyboardType: TextInputType.text,
       onSaved: (value) {
-        fullNameController.text = value!;
+        _fullNameController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -41,10 +42,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
     //Email filed
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailController,
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       onSaved: (value) {
-        emailController.text = value!;
+        _emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -58,10 +59,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
     //Password field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordController,
+      controller: _passwordController,
       obscureText: true,
       onSaved: (value) {
-        emailController.text = value!;
+        _emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -74,10 +75,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
     final confirmPasswordField = TextFormField(
       autofocus: false,
-      controller: confirmPasswordController,
+      controller: _confirmPasswordController,
       obscureText: true,
       onSaved: (value) {
-        confirmPasswordController.text = value!;
+        _confirmPasswordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -177,7 +178,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            addUser();
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             height: 45,
@@ -251,5 +254,28 @@ class _RegistrationFormState extends State<RegistrationForm> {
         ),
       ),
     );
+  }
+
+  void addUser() async {
+    dynamic result = await auth.registerUser(_fullNameController.text,
+        _emailController.text, _passwordController.text);
+    if (result == null) {
+      print("Invalid Email");
+    } else {
+      print(result.toString());
+      _fullNameController.clear();
+      _emailController.clear();
+      _passwordController.clear();
+      _confirmPasswordController.clear();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    }
+    future:
+    DatabaseService.instance.addUserProfile({
+      "name": _fullNameController.text.toString(),
+      "gender": 'male',
+      "address": 'Kano',
+      "age": '20',
+    });
   }
 }
