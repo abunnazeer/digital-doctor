@@ -257,6 +257,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
   }
 
   void addUser() async {
+    future:
+    DatabaseService.instance.addUserProfile({
+      "name": _fullNameController.text.toString(),
+      "gender": 'male',
+      "address": 'Kano',
+      "age": '20',
+    });
     dynamic result = await auth.registerUser(_fullNameController.text,
         _emailController.text, _passwordController.text);
     if (result == null) {
@@ -270,12 +277,5 @@ class _RegistrationFormState extends State<RegistrationForm> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     }
-    future:
-    DatabaseService.instance.addUserProfile({
-      "name": _fullNameController.text.toString(),
-      "gender": 'male',
-      "address": 'Kano',
-      "age": '20',
-    });
   }
 }

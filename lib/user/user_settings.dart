@@ -17,7 +17,7 @@ class UserSettings extends StatefulWidget {
 class _UserSettingsState extends State<UserSettings> {
   bool status = false;
   final DatabaseService _auth = DatabaseService.int();
-  // final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _UserSettingsState extends State<UserSettings> {
                               fontSize: 17, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
-                        Text('useremail'),
+                        Text('${user.email}'),
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () async {
